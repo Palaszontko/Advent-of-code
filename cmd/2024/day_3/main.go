@@ -2,12 +2,9 @@ package main
 
 import (
 	"fmt"
+	"github.com/Palaszontko/advent-of-code/cmd/utils"
 	"regexp"
 	"strings"
-
-	// "strings"
-
-	"github.com/Palaszontko/advent-of-code/cmd/utils"
 )
 
 func main() {
