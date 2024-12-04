@@ -21,5 +21,5 @@ func ReadFile(path string) string {
 		panic(fmt.Sprintf("failed to read file %q: %v", path, err))
 	}
 
-	return string(lines)
+	return string(lines[:len(lines)-1])
 }
