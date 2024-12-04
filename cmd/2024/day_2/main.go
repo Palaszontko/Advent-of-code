@@ -24,10 +24,6 @@ func Part1() {
 	result := 0
 
 	for _, line := range inputSplit {
-		if line == "" {
-			continue
-		}
-
 		levels := func(ss []string) []int {
 			intValues := make([]int, len(ss))
 			for i, s := range ss {
@@ -88,10 +84,6 @@ func Part2() {
 	result := 0
 
 	for _, line := range inputSplit {
-		if line == "" {
-			continue
-		}
-
 		levels := func(ss []string) []int {
 			intValues := make([]int, len(ss))
 			for i, s := range ss {

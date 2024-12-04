@@ -26,11 +26,9 @@ func Part1() {
 	list2 := []int{}
 
 	for _, line := range lines {
-		if len(line) != 0 {
-			values := strings.Fields(line)
-			list1 = append(list1, utils.MustAtoi(values[0]))
-			list2 = append(list2, utils.MustAtoi(values[1]))
-		}
+		values := strings.Fields(line)
+		list1 = append(list1, utils.MustAtoi(values[0]))
+		list2 = append(list2, utils.MustAtoi(values[1]))
 	}
 
 	sort.Ints(list1)
@@ -57,11 +55,9 @@ func Part2() {
 	map2 := map[int]int{}
 
 	for _, line := range lines {
-		if len(line) != 0 {
-			values := strings.Fields(line)
-			list1 = append(list1, utils.MustAtoi(values[0]))
-			map2[utils.MustAtoi(values[1])]++
-		}
+		values := strings.Fields(line)
+		list1 = append(list1, utils.MustAtoi(values[0]))
+		map2[utils.MustAtoi(values[1])]++
 	}
 
 	result := 0
