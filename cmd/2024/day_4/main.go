@@ -14,14 +14,6 @@ func main() {
 	Part2()
 }
 
-type word int
-
-const (
-	XMAS word = iota
-	SMAX
-	NOT_FOUND
-)
-
 func Part1() {
 	fmt.Println("Part 1")
 
