@@ -23,3 +23,21 @@ func ReadFile(path string) string {
 
 	return string(lines[:len(lines)-1])
 }
+
+func StringToIntSlice(ss []string) []int {
+	intValues := make([]int, len(ss))
+	for i, s := range ss {
+		intValues[i] = MustAtoi(s)
+	}
+	return intValues
+}
+
+func SliceSum(slice []int) int {
+	amount := 0
+
+	for _, val := range slice {
+		amount += val
+	}
+
+	return amount
+}
