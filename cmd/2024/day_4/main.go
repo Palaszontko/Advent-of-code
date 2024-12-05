@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"regexp"
 	"strings"
 
 	"github.com/Palaszontko/advent-of-code/cmd/utils"
@@ -10,7 +11,7 @@ import (
 func main() {
 	fmt.Println("Advent of Code 2024!")
 	Part1()
-	// Part2()
+	Part2()
 }
 
 type word int
@@ -102,4 +103,29 @@ func isXMAS(letter1 byte, letter2 byte, letter3 byte, letter4 byte) bool {
 
 func Part2() {
 	fmt.Println("Part 2")
+
+	input := utils.ReadFile("cmd/2024/day_4/input.txt")
+
+	inputSplit := strings.Split(input, "\n")
+
+	amount := 0
+
+	for i := 0; i < len(inputSplit)-2; i++ {
+		for j := 0; j < len(inputSplit[0])-2; j += 1 {
+			square := string(inputSplit[i][j:j+3]) +
+				string(inputSplit[i+1][j:j+3]) +
+				string(inputSplit[i+2][j:j+3])
+			if isCrossMAS(square) {
+				amount++
+			}
+		}
+	}
+
+	fmt.Println(amount)
+
+}
+
+func isCrossMAS(square string) bool {
+	pattern := regexp.MustCompile(`^(M.M.A.S.S|S.S.A.M.M|M.S.A.M.S|S.M.A.S.M)$`)
+	return pattern.Match([]byte(square))
 }
