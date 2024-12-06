@@ -41,3 +41,22 @@ func SliceSum(slice []int) int {
 
 	return amount
 }
+
+func SliceSum2D(slice [][]int) int {
+	amount := 0
+
+	for _, row := range slice {
+		amount += SliceSum(row)
+	}
+
+	return amount
+}
+
+func Copy2DSlice(original [][]byte) [][]byte {
+	copySlice := make([][]byte, len(original))
+	for i := range original {
+		copySlice[i] = make([]byte, len(original[i]))
+		copy(copySlice[i], original[i])
+	}
+	return copySlice
+}
