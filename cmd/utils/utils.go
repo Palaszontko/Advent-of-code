@@ -73,3 +73,15 @@ func CountIn2DSlice(slice [][]int, condition func(int) bool) int {
 
 	return amount
 }
+
+func Contains2DSlice(slice [][]int, condition func(int) bool) bool {
+	for _, row := range slice {
+		for _, val := range row {
+			if condition(val) {
+				return true
+			}
+		}
+	}
+
+	return false
+}
