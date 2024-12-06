@@ -60,3 +60,16 @@ func Copy2DSlice(original [][]byte) [][]byte {
 	}
 	return copySlice
 }
+
+func CountIn2DSlice(slice [][]int, condition func(int) bool) int {
+	amount := 0
+	for _, row := range slice {
+		for _, val := range row {
+			if condition(val) {
+				amount += 1
+			}
+		}
+	}
+
+	return amount
+}
