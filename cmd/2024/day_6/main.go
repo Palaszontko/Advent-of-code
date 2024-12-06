@@ -9,7 +9,6 @@ import (
 func main() {
 	fmt.Println("Advent of Code 2024!")
 	Part1()
-	// Part2()
 }
 
 type Direction int
@@ -22,117 +21,108 @@ const (
 )
 
 func Part1() {
-	fmt.Println("Part 1")
 	input := utils.ReadFile("cmd/2024/day_6/input.txt")
 
 	grid := [][]byte{}
-	for _, line := range strings.Split(input, "\n") {
-		grid = append(grid, []byte(line))
+
+	for _, row := range strings.Split(input, "\n") {
+		grid = append(grid, []byte(row))
 	}
 
+	_, _, _, visitedSquares := moveGuard(grid)
+
+	result := utils.CountIn2DSlice(visitedSquares, func(val int) bool { return val > 0 })
+
+	fmt.Println(result)
+
+}
+
+func moveGuard(grid [][]byte) (bool, int, int, [][]int) {
+
 	visitedSquares := make([][]int, len(grid))
+
 	for i := range visitedSquares {
 		visitedSquares[i] = make([]int, len(grid[0]))
 	}
 
-	i, j, direction := findGuard(grid)
-	for !moveGuard(&grid, i, j, direction, &visitedSquares) {
-		// printGridAnimation(grid)
-		i, j, direction = findGuard(grid)
+	i, j := findGuard(grid)
+	visitedSquares[i][j] += 1
+
+	direction := up
+
+	for isSafe(grid, i, j) {
+
+		switch direction {
+		case up:
+			if isSafe(grid, i-1, j) {
+				if grid[i-1][j] == '#' {
+					direction = (direction + 1) % 4
+				} else {
+					i -= 1
+				}
+			} else {
+				return true, i, j, visitedSquares
+			}
+		case down:
+			if isSafe(grid, i+1, j) {
+				if grid[i+1][j] == '#' {
+					direction = (direction + 1) % 4
+				} else {
+					i += 1
+				}
+			} else {
+				return true, i, j, visitedSquares
+			}
+		case left:
+			if isSafe(grid, i, j-1) {
+				if grid[i][j-1] == '#' {
+					direction = (direction + 1) % 4
+				} else {
+					j -= 1
+				}
+			} else {
+				return true, i, j, visitedSquares
+			}
+		case right:
+			if isSafe(grid, i, j+1) {
+				if grid[i][j+1] == '#' {
+					direction = (direction + 1) % 4
+				} else {
+					j += 1
+				}
+			} else {
+				return true, i, j, visitedSquares
+			}
+		}
+
+		visitedSquares[i][j] += 1
+
 	}
 
-	amount := utils.SliceSum2D(visitedSquares) + 1
-
-	fmt.Println(amount)
+	return true, i, j, visitedSquares
 
 }
 
-// func printGridAnimation(grid [][]byte) {
-// 	fmt.Print("\033[2J")
-// 	fmt.Print("\033[H")
+func isSafe(grid [][]byte, i int, j int) bool {
+	return i >= 0 && i < len(grid) && j >= 0 && j < len(grid[0])
+}
 
-// 	for _, line := range grid {
-// 		fmt.Printf("%s\n", line)
-// 	}
-
-// 	time.Sleep(20 * time.Millisecond)
-// }
-
-func findGuard(grid [][]byte) (int, int, Direction) {
+func findGuard(grid [][]byte) (int, int) {
 	for i := 0; i < len(grid); i++ {
 		for j := 0; j < len(grid[i]); j++ {
 			switch grid[i][j] {
 			case '^':
-				return i, j, up
+				return i, j
 			case 'v':
-				return i, j, down
+				return i, j
 			case '>':
-				return i, j, right
+				return i, j
 			case '<':
-				return i, j, left
+				return i, j
 			default:
 				continue
 			}
 		}
 	}
-	return -1, -1, -1
-}
-
-// return true if guard escaped
-func moveGuard(grid *[][]byte, i int, j int, direction Direction, visitedSquares *[][]int) bool {
-	mapDirection := map[Direction]byte{up: '^', down: 'v', left: '<', right: '>'}
-
-	switch direction {
-	case up:
-		if !isSafe(*grid, i-1, j) {
-			return true
-		}
-		if (*grid)[i-1][j] == '#' {
-			(*grid)[i][j] = mapDirection[(direction+1)%4]
-		} else if (*grid)[i-1][j] == '.' {
-			(*grid)[i][j], (*grid)[i-1][j] = (*grid)[i-1][j], (*grid)[i][j]
-			(*visitedSquares)[i][j] = 1
-		}
-	case right:
-		if !isSafe(*grid, i, j+1) {
-			return true
-		}
-		if (*grid)[i][j+1] == '#' {
-			(*grid)[i][j] = mapDirection[(direction+1)%4]
-		} else if (*grid)[i][j+1] == '.' {
-			(*grid)[i][j], (*grid)[i][j+1] = (*grid)[i][j+1], (*grid)[i][j]
-			(*visitedSquares)[i][j] = 1
-		}
-	case down:
-		if !isSafe(*grid, i+1, j) {
-			return true
-		}
-		if (*grid)[i+1][j] == '#' {
-			(*grid)[i][j] = mapDirection[(direction+1)%4]
-		} else if (*grid)[i+1][j] == '.' {
-			(*grid)[i][j], (*grid)[i+1][j] = (*grid)[i+1][j], (*grid)[i][j]
-			(*visitedSquares)[i][j] = 1
-		}
-	case left:
-		if !isSafe(*grid, i, j-1) {
-			return true
-		}
-		if (*grid)[i][j-1] == '#' {
-			(*grid)[i][j] = mapDirection[(direction+1)%4]
-		} else if (*grid)[i][j-1] == '.' {
-			(*grid)[i][j], (*grid)[i][j-1] = (*grid)[i][j-1], (*grid)[i][j]
-			(*visitedSquares)[i][j] = 1
-		}
-	}
-
-	return false
-}
-
-func isSafe(grid [][]byte, i, j int) bool {
-	if i >= 0 && i < len(grid) {
-		if j >= 0 && j < len(grid[0]) {
-			return true
-		}
-	}
-	return false
+	return -1, -1
 }
