@@ -134,6 +134,8 @@ func findGuard(grid [][]byte) (int, int) {
 
 func Part2() {
 	fmt.Println("Part 2")
+
+	start := time.Now()
 	input := utils.ReadFile("cmd/2024/day_6/input.txt")
 
 	grid := [][]byte{}
@@ -147,8 +149,6 @@ func Part2() {
 	guard_index_i, guard_index_j := findGuard(grid)
 
 	result := 0
-
-	start := time.Now()
 
 	for i := 0; i < len(grid); i += 1 {
 		for j := 0; j < len(grid[i]); j += 1 {
@@ -169,9 +169,9 @@ func Part2() {
 	}
 
 	elapsed := time.Since(start)
-	fmt.Println(result)
 
-	fmt.Printf("Execution completed in: %02dh:%02dm:%02ds:%03dms (%v)\n",
+	fmt.Printf("%v - Execution completed in: %02dh:%02dm:%02ds:%03dms (%v)\n",
+		result,
 		int(elapsed.Hours()),
 		int(elapsed.Minutes())%60,
 		int(elapsed.Seconds())%60,
