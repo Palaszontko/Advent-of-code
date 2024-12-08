@@ -27,7 +27,7 @@ func Part1() {
 
 	placeSignasMap := make([][]int, len(grid))
 
-	for i, _ := range placeSignasMap {
+	for i := range placeSignasMap {
 		placeSignasMap[i] = make([]int, len(grid[0]))
 	}
 
@@ -97,7 +97,7 @@ func Part2() {
 
 	placeSignasMap := make([][]int, len(grid))
 
-	for i, _ := range placeSignasMap {
+	for i := range placeSignasMap {
 		placeSignasMap[i] = make([]int, len(grid[0]))
 	}
 
