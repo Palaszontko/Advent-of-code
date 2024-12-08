@@ -53,7 +53,6 @@ func Part1() {
 }
 
 func findAntennas(grid [][]byte, index_i int, index_j int, antennaId byte) [][]int {
-
 	otherAntennas := [][]int{}
 
 	for i := 0; i < len(grid); i += 1 {
