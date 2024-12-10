@@ -9,8 +9,7 @@ import (
 
 func main() {
 	fmt.Println("Advent of Code 2024!")
-	Part1()
-	// Part2()
+	Part1_2()
 }
 
 type Point struct {
@@ -18,7 +17,7 @@ type Point struct {
 	y int
 }
 
-func Part1() {
+func Part1_2() {
 	fmt.Println("Part 1")
 
 	input := utils.ReadFile("cmd/2024/day_10/input.txt")
@@ -154,8 +153,4 @@ func findPathsDFS(graph map[Point][]Point, grid [][]int, currentPoint Point, cur
 
 func isSafe(grid [][]int, i int, j int) bool {
 	return i >= 0 && i < len(grid) && j >= 0 && j < len(grid[0])
-}
-
-func Part2() {
-	fmt.Println("Part 2")
 }
