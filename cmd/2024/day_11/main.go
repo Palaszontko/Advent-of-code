@@ -13,7 +13,7 @@ var per int = 1
 
 func main() {
 	fmt.Println("Advent of Code 2024!")
-	// Part1()
+	Part1()
 	Part2()
 }
 
@@ -49,7 +49,6 @@ func Part1() {
 				stones[i] *= 2024
 			}
 		}
-		fmt.Println(blink)
 	}
 
 	result := len(stones)
@@ -104,8 +103,6 @@ func countRecursive(stone int, blinksLeft int, cache map[string]int) int {
 
 	var result int
 	if blinksLeft == 0 {
-		per += 1
-		fmt.Println(per)
 		result = 1
 	} else if stone == 0 {
 		result = countRecursive(1, blinksLeft-1, cache)
