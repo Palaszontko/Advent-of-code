@@ -10,7 +10,7 @@ import (
 func main() {
 	fmt.Println("Advent of Code 2024!")
 	Part1()
-	// Part2()
+	Part2()
 }
 
 type Direction int
@@ -216,4 +216,76 @@ func findRobot(grid [][]byte) (int, int) {
 
 func Part2() {
 	fmt.Println("Part 2")
+
+	input := `#######
+#...#.#
+#.....#
+#..OO@#
+#..O..#
+#.....#
+#######
+
+<vv<<^^<<^^`
+
+	grid := [][]byte{}
+	moves := []byte{}
+
+	isGrid := true
+
+	for _, row := range strings.Split(input, "\n") {
+		if isGrid {
+			if row == "" {
+				isGrid = false
+				continue
+			}
+			grid = append(grid, []byte(row))
+		} else {
+			moves = append(moves, []byte(row)...)
+		}
+	}
+
+	wideGrid := convertToWideGrid(grid)
+
+	printGrid(wideGrid)
+
+}
+
+func convertToWideGrid(grid [][]byte) [][]byte {
+	gridWide := []byte{}
+
+	for i := 0; i < len(grid); i += 1 {
+		for j := 0; j < len(grid[0]); j += 1 {
+			switch grid[i][j] {
+			case '#':
+				gridWide = append(gridWide, []byte{'#', '#'}...)
+			case 'O':
+				gridWide = append(gridWide, []byte{'[', ']'}...)
+			case '.':
+				gridWide = append(gridWide, []byte{'.', '.'}...)
+			case '@':
+				gridWide = append(gridWide, []byte{'@', '.'}...)
+			}
+		}
+	}
+
+	gridWide2D := [][]byte{}
+
+	for i := 0; i < len(gridWide); i += len(grid[0]) * 2 {
+		gridWide2D = append(gridWide2D, gridWide[i:i+len(grid[0])*2])
+	}
+
+	return gridWide2D
+
+}
+
+func isBoxWide(grid [][]byte, i, j int) bool {
+	return grid[i][j] == '[' || grid[i][j] == ']'
+}
+
+func isBoxLeft(grid [][]byte, i, j int) bool {
+	return grid[i][j] == '['
+}
+
+func isBoxRight(grid [][]byte, i, j int) bool {
+	return grid[i][j] == ']'
 }
