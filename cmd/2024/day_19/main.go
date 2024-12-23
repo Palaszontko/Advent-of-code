@@ -32,6 +32,7 @@ bbrgwb`
 	for _, row := range strings.Split(input, "\n")[1:] {
 		if row != "" {
 			designs = append(designs, row)
+			fmt.Println("SEP")
 		}
 	}
 
