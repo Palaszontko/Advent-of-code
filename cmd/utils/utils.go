@@ -52,7 +52,7 @@ func SliceSum2D(slice [][]int) int {
 	return amount
 }
 
-func deepCopy2D[T any](matrix [][]T) [][]T {
+func DeepCopy2D[T any](matrix [][]T) [][]T {
 	if matrix == nil {
 		return nil
 	}
