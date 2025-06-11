@@ -86,6 +86,6 @@ func Contains2DSlice(slice [][]int, condition func(int) bool) bool {
 	return false
 }
 
-func InsertAtIndexIn2DSlice[S ~[][]E, R ~[]E, E any](slice2d S, row R, index int) S {
+func InsertAtIndexIn2DSlice[S [][]E, R []E, E any](slice2d S, row R, index int) S {
 	return append(slice2d[:index], append([][]E{row}, slice2d[index:]...)...)
 }
