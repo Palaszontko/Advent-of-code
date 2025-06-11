@@ -52,13 +52,19 @@ func SliceSum2D(slice [][]int) int {
 	return amount
 }
 
-func Copy2DSlice(original [][]byte) [][]byte {
-	copySlice := make([][]byte, len(original))
-	for i := range original {
-		copySlice[i] = make([]byte, len(original[i]))
-		copy(copySlice[i], original[i])
+func deepCopy2D[T any](matrix [][]T) [][]T {
+	if matrix == nil {
+		return nil
 	}
-	return copySlice
+
+	result := make([][]T, len(matrix))
+	for i := range matrix {
+		if matrix[i] != nil {
+			result[i] = make([]T, len(matrix[i]))
+			copy(result[i], matrix[i])
+		}
+	}
+	return result
 }
 
 func CountIn2DSlice[T any](slice [][]T, condition func(T) bool) int {
