@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Advent of Code 2024!")
+	fmt.Println("Advent of Code 2023!")
 	Part1()
 	// Part2()
 }
