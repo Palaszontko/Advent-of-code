@@ -37,50 +37,57 @@ This repository contains my solutions for [Advent of Code 2024](https://adventof
 - **Create a new day**: To create a new day’s directory with a Go program template and input file, run:
 
   ```bash
-  just new-day 1
+  just new-day 2024 1
   ```
 
-  Replace `1` with the day number you want to create. This will:
+  Replace `2024` with the year and `1` with the day number you want to create. This will:
 
-  - Create a new folder in `cmd/2024/day_{{DAY}}`
+  - Create a new folder in `cmd/{YEAR}/day_{DAY}`
   - Copy a Go template into the new directory
   - Fetch the input data for the day from the Advent of Code website
 
 - **Run the solution**: To run the Go program for a specific day, use:
 
   ```bash
-  just run 1
+  just run 2024 1
   ```
 
-  Replace `1` with the day number you want to run.
+  Replace `2024` with the year and `1` with the day number you want to run.
 
 - **Remove a day**: If you want to remove the day’s folder and files, run:
 
   ```bash
-  just remove 1
+  just remove 2024 1
   ```
 
-  Replace `1` with the day number you want to remove.
+  Replace `2024` with the year and `1` with the day number you want to remove.
 
 ## File Structure
 
 ```
 advent-of-code/
 ├── cmd/
-│   ├── 2024/
+│   ├── 2023/
 │   │   └── day_1/
-│   │       ├── input.txt
-│   │       └── main.go
+│   │   │   ├── input.txt
+│   │   │   └── main.go
+│   │   └── ...
+│   ├── 2024/
+│   │   ├── day_1/
+│   │   │   ├── input.txt
+│   │   │   └── main.go
+│   │   └── ...
 │   └── utils/
-│       └── utils.go
+│       ├── utils.go
+│       └── directedGraph.go
 ├── go.mod
 ├── justfile
 └── template/
     └── main.go
 ```
 
-- `cmd/2024/day_{n}/`: Contains the Go solution for day `{n}` and the input file for that day.
-- `cmd/utils/`: Contains utility functions used in the solutions (`utils.go`).
+- `cmd/{year}/day_{n}/`: Contains the Go solution for day `{n}` and the input file for that day.
+- `cmd/utils/`: Contains utility functions used in the solutions (`utils.go`, `directedGraph.go`).
 - `go.mod`: Go module file, handling dependencies.
 - `justfile`: File containing task automation commands with Just.
 - `template/`: Contains a template Go program for new days.
