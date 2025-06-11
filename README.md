@@ -1,6 +1,6 @@
-# Advent of Code 2024
+# Advent of Code
 
-This repository contains my solutions for [Advent of Code 2024](https://adventofcode.com/2024) challenges. It is organized by day, and each day contains a Go program to solve the corresponding puzzle. The setup includes a simple `justfile` that automates creating new days, running solutions, and removing completed challenges.
+This repository contains my solutions for [Advent of Code](https://adventofcode.com/) challenges. It is organized by day, and each day contains a Go program to solve the corresponding puzzle. The setup includes a simple `justfile` that automates creating new days, running solutions, and removing completed challenges.
 
 ## Features
 
@@ -14,8 +14,8 @@ This repository contains my solutions for [Advent of Code 2024](https://adventof
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/yourusername/advent-of-code-2024.git
-   cd advent-of-code-2024
+   git clone https://github.com/Palaszontko/advent-of-code.git
+   cd advent-of-code
    ```
 
 2. Install the necessary dependencies for Go.
