@@ -87,10 +87,10 @@ func Part2() {
 
 	seedsSpliited := utils.StringToIntSlice(strings.Split(splittedInput[0], " ")[1:len(strings.Split(splittedInput[0], " "))])
 
-	seeds := [][]int{}
+	seeds := [][2]int{}
 
 	for i := 0; i < len(seedsSpliited)-1; i += 2 {
-		seeds = append(seeds, []int{seedsSpliited[i], seedsSpliited[i] + seedsSpliited[i+1] - 1})
+		seeds = append(seeds, [2]int{seedsSpliited[i], seedsSpliited[i+1]})
 	}
 
 	pattern := regexp.MustCompile(`(.+).{1}(map:)\n((\d+).(\d+).(\d+)(\n|))+`)
@@ -117,21 +117,16 @@ func Part2() {
 		allMaps = append(allMaps, arrayOfDSL)
 	}
 
-	currentRanges := [][2]int{}
-	for _, s := range seeds {
-		currentRanges = append(currentRanges, [2]int{s[0], s[1] - s[0] + 1})
-	}
-
 	for _, mapping := range allMaps {
 		newRanges := [][2]int{}
-		for _, r := range currentRanges {
+		for _, r := range seeds {
 			newRanges = append(newRanges, applyingMap(r[0], r[1], mapping)...)
 		}
-		currentRanges = newRanges
+		seeds = newRanges
 	}
 
-	min := currentRanges[0][0]
-	for _, r := range currentRanges {
+	min := seeds[0][0]
+	for _, r := range seeds {
 		if r[0] < min {
 			min = r[0]
 		}
