@@ -95,3 +95,22 @@ func Contains2DSlice(slice [][]int, condition func(int) bool) bool {
 func InsertAtIndexIn2DSlice[S [][]E, R []E, E any](slice2d S, row R, index int) S {
 	return append(slice2d[:index], append([][]E{row}, slice2d[index:]...)...)
 }
+
+func Gcd(a, b int64) int64 {
+	for b != 0 {
+		a, b = b, a%b
+	}
+	return a
+}
+
+func Lcm(a, b int64) int64 {
+	return a * b / Gcd(a, b)
+}
+
+func LcmMultipleNumbers(numbers []int64) int64 {
+	result := numbers[0]
+	for _, num := range numbers[1:] {
+		result = Lcm(result, num)
+	}
+	return result
+}
