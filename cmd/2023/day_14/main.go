@@ -109,11 +109,9 @@ func Part2() {
 		transGrid = utils.Transpose2D(transGrid)
 		simulateGravity(&transGrid)
 		transGrid = utils.Transpose2D(transGrid)
-		// printGrid(transGrid)
 
 		//west
 		simulateGravity(&transGrid)
-		// printGrid(transGrid)
 
 		//south
 		reverseEachColumn(&transGrid)
@@ -121,13 +119,11 @@ func Part2() {
 		simulateGravity(&transGrid)
 		transGrid = utils.Transpose2D(transGrid)
 		reverseEachColumn(&transGrid)
-		// printGrid(transGrid)
 
 		//east
 		reverseEachRow(&transGrid)
 		simulateGravity(&transGrid)
 		reverseEachRow(&transGrid)
-		// printGrid(transGrid)
 
 		state := buildStringGrid(transGrid)
 
@@ -140,11 +136,9 @@ func Part2() {
 				transGrid = utils.Transpose2D(transGrid)
 				simulateGravity(&transGrid)
 				transGrid = utils.Transpose2D(transGrid)
-				// printGrid(transGrid)
 
 				//west
 				simulateGravity(&transGrid)
-				// printGrid(transGrid)
 
 				//south
 				reverseEachColumn(&transGrid)
@@ -152,13 +146,11 @@ func Part2() {
 				simulateGravity(&transGrid)
 				transGrid = utils.Transpose2D(transGrid)
 				reverseEachColumn(&transGrid)
-				// printGrid(transGrid)
 
 				//east
 				reverseEachRow(&transGrid)
 				simulateGravity(&transGrid)
 				reverseEachRow(&transGrid)
-				// printGrid(transGrid)
 			}
 
 			result := 0
