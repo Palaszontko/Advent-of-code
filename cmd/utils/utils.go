@@ -114,3 +114,50 @@ func LcmMultipleNumbers(numbers []int64) int64 {
 	}
 	return result
 }
+
+func CountInSlice[S []E, E comparable](slice S, element E) int {
+	amount := 0
+	for _, x := range slice {
+		if x == element {
+			amount += 1
+		}
+	}
+	return amount
+}
+
+func Transpose2D[T any](grid [][]T) [][]T {
+	if len(grid) == 0 || len(grid[0]) == 0 {
+		return nil
+	}
+
+	transGrid := make([][]T, len(grid[0]))
+	for i := 0; i < len(grid[0]); i++ {
+		transGrid[i] = make([]T, len(grid))
+		for j := 0; j < len(grid); j++ {
+			transGrid[i][j] = grid[j][i]
+		}
+	}
+	return transGrid
+}
+
+func ReverseEachColumn[T any](grid *[][]T) {
+	for left, right := 0, len(*grid)-1; left < right; left, right = left+1, right-1 {
+		(*grid)[left], (*grid)[right] = (*grid)[right], (*grid)[left]
+	}
+}
+
+func ReverseEachRow[T any](grid *[][]T) {
+	for i := 0; i < len(*grid); i++ {
+		for left, right := 0, len((*grid)[i])-1; left < right; left, right = left+1, right-1 {
+			(*grid)[i][left], (*grid)[i][right] = (*grid)[i][right], (*grid)[i][left]
+		}
+	}
+}
+
+func Rotate2DMatrixBy90Deg[T any](grid [][]T) [][]T {
+	transGrid := Transpose2D(grid)
+	ReverseEachRow(&transGrid)
+
+	return transGrid
+
+}
