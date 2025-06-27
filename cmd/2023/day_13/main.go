@@ -130,7 +130,6 @@ func findReflectionPart2(pattern [][]string) int {
 				under := pattern[under_start:under_end]
 
 				if dif_index := findAmountOfDifferences(above, under); dif_index[0] != -1 && (under_end == len(pattern) || above_start == 0) {
-					fmt.Println(above, under)
 					return i + 1
 
 				}
