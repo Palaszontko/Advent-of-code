@@ -10,7 +10,7 @@ import (
 func main() {
 	fmt.Println("Advent of Code 2023!")
 	Part1()
-	// Part2()
+	Part2()
 }
 
 type Point struct {
@@ -115,18 +115,7 @@ func energizedPath(grid [][]string, i, j int, direction Direction, visitedPoints
 func Part1() {
 	fmt.Println("Part 1")
 
-	input := `.|...\....
-|.-.\.....
-.....|-...
-........|.
-..........
-.........\
-..../.\\..
-.-.-/..|..
-.|....-|.\
-..//.|....`
-
-	input = utils.ReadFile("cmd/2023/day_16/input.txt")
+	input := utils.ReadFile("cmd/2023/day_16/input.txt")
 
 	var grid [][]string
 
@@ -158,4 +147,62 @@ func Part1() {
 
 func Part2() {
 	fmt.Println("Part 2")
+
+	input := utils.ReadFile("cmd/2023/day_16/input.txt")
+
+	var grid [][]string
+
+	for i, row := range strings.Split(input, "\n") {
+		grid = append(grid, make([]string, len(row)))
+		for j, ch := range row {
+			grid[i][j] = string(ch)
+		}
+	}
+
+	createVisitedPoints := func(grid [][]string) map[Point]map[Direction]bool {
+		visitedPoints := make(map[Point]map[Direction]bool)
+		for i := range grid {
+			for j := range grid[i] {
+				visitedPoints[Point{i, j}] = make(map[Direction]bool)
+			}
+		}
+		return visitedPoints
+	}
+
+	countEnergized := func(visitedPoints map[Point]map[Direction]bool) int {
+		count := 0
+		for _, directions := range visitedPoints {
+			if len(directions) > 0 {
+				count++
+			}
+		}
+		return count
+	}
+
+	best := -1
+
+	//top and bottom
+	for j := 0; j < len(grid[0]); j += 1 {
+		tmp := createVisitedPoints(grid)
+		energizedPath(grid, 0, j, Down, tmp)
+		best = max(best, countEnergized(tmp))
+
+		tmp = createVisitedPoints(grid)
+		energizedPath(grid, len(grid)-1, j, Up, tmp)
+		best = max(best, countEnergized(tmp))
+	}
+
+	//left and right
+	for i := 0; i < len(grid); i += 1 {
+		tmp := createVisitedPoints(grid)
+		energizedPath(grid, i, 0, Right, tmp)
+		best = max(best, countEnergized(tmp))
+
+		tmp = createVisitedPoints(grid)
+		energizedPath(grid, len(grid[0])-1, 0, Left, tmp)
+		best = max(best, countEnergized(tmp))
+	}
+
+	fmt.Println(best)
+
 }
