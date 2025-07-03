@@ -199,7 +199,7 @@ func Part2() {
 		best = max(best, countEnergized(tmp))
 
 		tmp = createVisitedPoints(grid)
-		energizedPath(grid, len(grid[0])-1, 0, Left, tmp)
+		energizedPath(grid, i, len(grid[0])-1, Left, tmp)
 		best = max(best, countEnergized(tmp))
 	}
 
