@@ -12,5 +12,9 @@ run YEAR DAY:
     echo "Advent of code - day {{DAY}}"
     go run cmd/{{YEAR}}/day_{{DAY}}/main.go
 
+input YEAR DAY:
+    echo "Getting input for Advent of Code {{YEAR}} - day {{DAY}}"
+    curl --cookie "session=$SESSION" https://adventofcode.com/{{YEAR}}/day/{{DAY}}/input -o cmd/{{YEAR}}/day_{{DAY}}/input.txt
+
 remove YEAR DAY:
     rm -rf cmd/{{YEAR}}/day_{{DAY}}
