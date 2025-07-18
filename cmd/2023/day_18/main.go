@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"strconv"
 	"strings"
 
 	"github.com/Palaszontko/advent-of-code/cmd/utils"
@@ -11,7 +12,7 @@ import (
 func main() {
 	fmt.Println("Advent of Code 2023!")
 	Part1()
-	// Part2()
+	Part2()
 }
 
 type Point struct {
@@ -142,6 +143,72 @@ func Part1() {
 	fmt.Println(result)
 }
 
+func createTerrainPart2(input string) int64 {
+	directionMap := map[int]string{
+		0: "R",
+		1: "D",
+		2: "L",
+		3: "U",
+	}
+
+	_ = directionMap
+
+	startingPoint := Point{0, 0}
+
+	currentPoint := startingPoint
+	order := []Point{startingPoint}
+	perimeter := int64(0)
+
+	for _, line := range strings.Split(input, "\n") {
+		color := strings.Split(line, " ")[2]
+		color = color[2 : len(color)-1]
+
+		meters, _ := strconv.ParseInt(color[:5], 16, 64)
+		direction := directionMap[utils.MustAtoi(color[5:])]
+
+		next_i, next_j := currentPoint.i, currentPoint.j
+		switch direction {
+		case "R":
+			next_j += meters
+		case "L":
+			next_j -= meters
+		case "U":
+			next_i -= meters
+		case "D":
+			next_i += meters
+		}
+
+		perimeter += meters
+		currentPoint = Point{next_i, next_j}
+		order = append(order, currentPoint)
+	}
+
+	//Calculate area using shoelaces formula + Pick's theorem
+	area := shoelacesFormula(order)
+
+	// Pick's theorem: https://en.wikipedia.org/wiki/Pick%27s_theorem
+	// from a = i + b/2 - 1 to => b + i = a + b/2 + 1
+	totalPoints := int64(area) + perimeter/2 + 1
+	return totalPoints
+}
+
+func shoelacesFormula(points []Point) float64 {
+	points = append(points, points[0])
+	sum := int64(0)
+	for index := 0; index < len(points)-1; index += 1 {
+		sum += points[index].i*points[index+1].j - points[index+1].i*points[index].j
+	}
+
+	if sum < 0 {
+		sum = -sum
+	}
+	return float64(sum) / 2
+}
+
 func Part2() {
 	fmt.Println("Part 2")
+
+	input := utils.ReadFile("cmd/2023/day_18/input.txt")
+	result := createTerrainPart2(input)
+	fmt.Println(result)
 }
