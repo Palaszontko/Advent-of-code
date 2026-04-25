@@ -1,0 +1,12 @@
+[workspace]
+resolver = "2"
+members = [
+    "utils",
+    "2026/day_1",
+    # AOC_MEMBERS_MARKER (do not remove — `just new-day-rs` inserts entries above this line)
+]
+exclude = ["template"]
+
+[workspace.package]
+edition = "2024"
+rust-version = "1.85"

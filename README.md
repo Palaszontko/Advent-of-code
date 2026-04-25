@@ -91,3 +91,35 @@ advent-of-code/
 - `go.mod`: Go module file, handling dependencies.
 - `justfile`: File containing task automation commands with Just.
 - `template/`: Contains a template Go program for new days.
+
+## Rust
+
+A parallel Rust setup is available for any year, living in a Cargo workspace under `rust/`. The Go setup remains usable for any year as well — pick whichever you prefer per-day.
+
+Layout:
+
+```
+rust/
+├── Cargo.toml            # workspace root
+├── utils/                # shared aoc-utils crate (read_file)
+├── {year}/day_{n}/       # per-day binary crate
+│   ├── Cargo.toml
+│   ├── src/main.rs
+│   └── input.txt
+└── template/             # used by `just new-day-rs`
+```
+
+Requirements: `rustup` / `cargo` (Rust 1.85+ for edition 2024).
+
+Commands (work for any year):
+
+- **Create a new day**: `just new-day-rs {YEAR} {DAY}` — scaffolds `rust/{YEAR}/day_{DAY}/`, renders the template, and fetches the input (needs `SESSION`).
+- **Run**: `just run-rs {YEAR} {DAY}` — runs `cargo run -p aoc-{YEAR}-day-{DAY}`.
+- **Fetch input only**: `just input-rs {YEAR} {DAY}`.
+- **Remove**: `just remove-rs {YEAR} {DAY}`.
+
+Inside a day's `main.rs` load the input with `include_str!` (path is relative to the source file, so it works regardless of cwd):
+
+```rust
+let input: &str = include_str!("../input.txt");
+```
