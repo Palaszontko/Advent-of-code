@@ -2,7 +2,8 @@
 resolver = "2"
 members = [
     "utils",
-    "2026/day_1",
+    "2025/day_1",
+    "2025/day_10",
     # AOC_MEMBERS_MARKER (do not remove — `just new-day-rs` inserts entries above this line)
 ]
 exclude = ["template"]

@@ -1,11 +1,11 @@
 [package]
-name = "aoc-2026-day-1"
+name = "aoc-2025-day-1"
 version = "0.1.0"
 edition.workspace = true
 rust-version.workspace = true
 
 [[bin]]
-name = "aoc-2026-day-1"
+name = "aoc-2025-day-1"
 path = "src/main.rs"
 
 [dependencies]

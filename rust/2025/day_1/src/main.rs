@@ -1,5 +1,5 @@
 fn main() {
-    println!("Advent of Code 2026!");
+    println!("Advent of Code 2025!");
     part1();
     part2();
 }
