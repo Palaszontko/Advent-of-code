@@ -1,0 +1,12 @@
+[package]
+name = "aoc-2025-day-10"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "aoc-2025-day-10"
+path = "src/main.rs"
+
+[dependencies]
+aoc-utils = { path = "../../utils" }
