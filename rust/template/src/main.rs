@@ -1,9 +1,9 @@
 use std::time::Instant;
 
-use aoc_2025_day_10::{part1, part2};
+use aoc___YEAR___day___DAY__::{part1, part2};
 
 fn main() {
-    println!("Advent of Code 2025 - day 10");
+    println!("Advent of Code __YEAR__ - day __DAY__");
     let input = include_str!("../input.txt").trim_end_matches('\n');
 
     let t = Instant::now();

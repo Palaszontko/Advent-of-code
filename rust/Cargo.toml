@@ -11,3 +11,6 @@ exclude = ["template"]
 [workspace.package]
 edition = "2024"
 rust-version = "1.85"
+
+[workspace.dependencies]
+divan = "0.1"
